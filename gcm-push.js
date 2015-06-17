@@ -4,13 +4,13 @@ function subscribe(pushSubscription)
 {
     return new Promise(function(resolve, reject) {
         if (pushSubscription instanceof PushSubscription) {
-            document.write('get');
+            document.write('<p>get</p>');
             resolve(pushSubscription);
         } else {
             navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
                 serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true})
                     .then(function (pushSubscription) {
-                        document.write('subscribe');
+                        document.write('<p>subscribe</p>');
                         resolve(pushSubscription);
                     })
                     .catch(function (e) {
@@ -18,16 +18,16 @@ function subscribe(pushSubscription)
                         if ('permissions' in navigator) {
                             navigator.permissions.query({name: 'push', userVisibleOnly: true})
                                 .then(function (permissionStatus) {
-                                    document.write('subscribe() Error: Push permission status = ' + permissionStatus.status);
+                                    document.write('<p>subscribe() Error: Push permission status = ' + permissionStatus.status + '</p>');
                                     console.log(permissionStatus);
                                     if (permissionStatus.status === 'denied') {
                                         // The user blocked the permission prompt
-                                        document.write('Ooops Notifications are Blocked',
+                                        document.write('<p>Ooops Notifications are Blocked',
                                             'Unfortunately you just permanently blocked notifications. ' +
                                             'Please unblock / allow them to switch on push ' +
-                                            'notifications.');
+                                            'notifications.</p>');
                                     } else if (permissionStatus.status === 'prompt') {
-                                        document.write('The user didn\'t accept the permission prompt');
+                                        document.write('<p>The user didn\'t accept the permission prompt</p>');
                                     } else {
                                         document.write('Ooops Push Couldn\'t Register',
                                             '<p>When we tried to ' +
@@ -55,9 +55,9 @@ function subscribe(pushSubscription)
                         } else {
                             // Use notification permission to do something
                             if (Notification.permission === 'denied') {
-                                document.write('Ooops Notifications are Blocked',
+                                document.write('<p>Ooops Notifications are Blocked',
                                     'Unfortunately you just permanently blocked notifications. ' +
-                                    'Please unblock / allow them to switch on push notifications.');
+                                    'Please unblock / allow them to switch on push notifications.</p>');
                             } else {
                                 document.write('Ooops Push Couldn\'t Register',
                                     '<p>When we tried to ' +
@@ -85,24 +85,24 @@ window.addEventListener('load', function() {
                     .then(subscribe)
                     .then(function(pushSubscription) {
                         console.log(pushSubscription);
-                        document.write(pushSubscription.subscriptionId);
+                        document.write('<p>' + pushSubscription.subscriptionId + '</p>');
                     })
                     .catch(function(error) {
                         console.log(error);
-                        document.write(error.message);
+                        document.write('<p>' + error.message + '</p>');
                     });
             })
             .catch(function (error) {
                 console.log(error);
-                document.write(error.message)
+                document.write('<p>' + error.message + '</p>');
             });
 
         navigator.serviceWorker.register('service-worker.js')
             .catch(function(error) {
                 console.log(error);
-                document.write(error.message)
+                document.write('<p>' + error.message + '</p>')
             });
     } else {
-        document.write('Push messaging not supported');
+        document.write('<p>Push messaging not supported</p>');
     }
 });
