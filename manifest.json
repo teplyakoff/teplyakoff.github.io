@@ -1,8 +1,5 @@
 {
-  "name": "Touch my push",
-  "short_name": "TMP",
-  "start_url": "/",
   "display": "standalone",
-  "gcm_sender_id": "217410861981",
+  "gcm_sender_id": "159796222495",
   "gcm_user_visible_only": true
 }
