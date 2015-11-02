@@ -8,6 +8,7 @@ var redirectUrl;
 
 self.addEventListener('push', function(event) {
     console.log('delivery', event);
+    console.log(self.registration);
 
     // Hardcoded notification options
     var title = 'Title'; // Required, others are optional
