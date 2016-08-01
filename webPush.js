@@ -4,7 +4,7 @@ navigator.serviceWorker.register('/webPushWorker.js')
 
     var isSubscriptionProposed = false;
 
-    navigator.serviceWorker.ready.then(function (serviceWorkerRegistration) {
+    return navigator.serviceWorker.ready.then(function (serviceWorkerRegistration) {
       if (Notification.permission === 'default') {
         isSubscriptionProposed = true;
         console.log('proposed');
