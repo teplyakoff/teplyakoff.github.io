@@ -1,5 +1,8 @@
 {
+  "name": "Web push 2",
+  "short_name": "WP2",
+  "start_url": "/",
   "display": "standalone",
-  "gcm_sender_id": "159796222495",
+  "gcm_sender_id": "628077053996",
   "gcm_user_visible_only": true
 }
